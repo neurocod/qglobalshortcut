@@ -106,9 +106,13 @@ quint32 QGlobalShortcut::toNativeModifiers(Qt::KeyboardModifiers m) {
     return mods;
 }
 
-void QGlobalShortcut::registerKey(quint32 k, quint32 m, quint32 id) {
+bool QGlobalShortcut::registerKey(quint32 k, quint32 m, quint32 id) {
     if(!RegisterHotKey(NULL, id, m, k))
+    {
         Q_ASSERT(false);
+        return false;
+    }
+    return true;
 }
 
 void QGlobalShortcut::unregisterKey(quint32 k, quint32 m, quint32 id) {

@@ -34,19 +34,22 @@ QKeySequence QGlobalShortcut::key() const
     return keyseq_;
 }
 
-void QGlobalShortcut::setKey(const QKeySequence& keyseq)
+bool QGlobalShortcut::setKey(const QKeySequence& keyseq)
 {
     if (!keyseq_.isEmpty()) {
         unsetKey();
     }
+    bool ret = false;
     quint32 keyid = calcId(keyseq);
     if (shortcuts_.count(keyid) == 0) {
         quint32 keycode = toNativeKeycode(getKey(keyseq));
         quint32 mods = toNativeModifiers(getMods(keyseq));
-        registerKey(keycode, mods, keyid);
+        ret = registerKey(keycode, mods, keyid);
     }
     this->keyseq_ = keyseq;
     shortcuts_.insert(keyid, this);
+
+    return ret;
 }
 
 void QGlobalShortcut::unsetKey() {

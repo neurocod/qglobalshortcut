@@ -113,9 +113,10 @@ quint32 QGlobalShortcut::toNativeModifiers(Qt::KeyboardModifiers m) {
     return mods;
 }
 
-void QGlobalShortcut::registerKey(quint32 k, quint32 m, quint32 id) {
+bool QGlobalShortcut::registerKey(quint32 k, quint32 m, quint32 id) {
     xcb_grab_key(QX11Info::connection(), 1, QX11Info::appRootWindow(),
                  m, k, XCB_GRAB_MODE_ASYNC, XCB_GRAB_MODE_ASYNC);
+    return true;
 }
 
 void QGlobalShortcut::unregisterKey(quint32 k, quint32 m, quint32 id) {

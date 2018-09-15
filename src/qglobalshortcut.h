@@ -23,7 +23,7 @@ public:
     bool nativeEventFilter(const QByteArray& event_type, void* message, long* result);
 
     QKeySequence key() const;
-    void setKey(const QKeySequence& keyseq);
+    bool setKey(const QKeySequence& keyseq);
     //bool isEnabled() const;    void setEnabled(bool on);
 
 signals:
@@ -46,6 +46,6 @@ private:
     static inline Qt::KeyboardModifiers getMods(const QKeySequence& keyseq);
     static quint32 toNativeKeycode(Qt::Key k);
     static quint32 toNativeModifiers(Qt::KeyboardModifiers m);
-    static void registerKey(quint32 k, quint32 m, quint32 id);
+    static bool registerKey(quint32 k, quint32 m, quint32 id);
     static void unregisterKey(quint32 k, quint32 m, quint32 id);
 };
