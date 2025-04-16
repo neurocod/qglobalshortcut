@@ -13,14 +13,14 @@ private:
 
     class QGlobalShortcutEventFilter : public QAbstractNativeEventFilter {
     public:
-        bool nativeEventFilter(const QByteArray& eventType, void* message, long* result);
+        bool nativeEventFilter(const QByteArray& eventType, void* message, qintptr* result) override;
     };
 
 public:
     explicit QGlobalShortcut(QObject* parent = nullptr);
     explicit QGlobalShortcut(const QKeySequence& keyseq, QObject* parent = nullptr);
     ~QGlobalShortcut();
-    bool nativeEventFilter(const QByteArray& event_type, void* message, long* result);
+    bool nativeEventFilter(const QByteArray& event_type, void* message, qintptr* result);
 
     QKeySequence key() const;
     bool setKey(const QKeySequence& keyseq);

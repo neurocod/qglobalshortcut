@@ -86,15 +86,16 @@ quint32 QGlobalShortcut::calcId(quint32 k, quint32 m) {
 #endif
 
 Qt::Key QGlobalShortcut::getKey(const QKeySequence& keyseq) {
-    if (keyseq.isEmpty()) {
+    if (keyseq.isEmpty())
         return Qt::Key(0);
-    }
-    return Qt::Key(keyseq[0] & ~Qt::KeyboardModifierMask);
+
+    QKeyCombination comb = keyseq[0];
+    return comb.key();
 }
 
 Qt::KeyboardModifiers QGlobalShortcut::getMods(const QKeySequence& keyseq) {
     if (keyseq.isEmpty()) {
         return Qt::KeyboardModifiers(0);
     }
-    return Qt::KeyboardModifiers(keyseq[0] & Qt::KeyboardModifierMask);
+    return keyseq[0].keyboardModifiers();
 }

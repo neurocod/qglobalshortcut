@@ -6,7 +6,7 @@
 #include <X11/keysym.h>
 
 bool QGlobalShortcut::QGlobalShortcutEventFilter::nativeEventFilter(
-        const QByteArray& eventType, void* message, long* result)
+        const QByteArray& eventType, void* message, qintptr* result)
 {
     xcb_generic_event_t* e = static_cast<xcb_generic_event_t*>(message);
     if ((e->response_type & ~0x80) == XCB_KEY_PRESS) {
