@@ -109,7 +109,7 @@ quint32 QGlobalShortcut::toNativeModifiers(Qt::KeyboardModifiers m) {
 bool QGlobalShortcut::registerKey(quint32 k, quint32 m, quint32 id) {
     if(!RegisterHotKey(NULL, id, m, k))
     {
-        Q_ASSERT(false);
+        qDebug() << "Can't register QGlobalShortcut hotkey";
         return false;
     }
     return true;
